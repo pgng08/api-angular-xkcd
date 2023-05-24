@@ -1,0 +1,21 @@
+<!-- <h1>bande-dessiner</h1> -->
+
+<div>
+    <span> Recherche (ID de 1 à 2768) : </span>
+    <input type="number" value="1" [(ngModel)]="uneBD.num" min="1" max="2768"/>
+    <button (click)="btnSoumettre(uneBD.num)">🔍 Soumettre</button>
+    <p>
+        <small><button (click)="btnAleatoire()">🔀 BD Aleatoire</button></small>
+        <small><button (click)="btnDerniere()">🆕 Dernière BD</button></small>
+    </p>
+</div>
+
+<hr>
+
+<div>
+    <p>BD Numéro: {{uneBD.num}}</p>
+    <p>Date: {{uneBD.year}}/{{uneBD.month}}/{{uneBD.day}}</p>
+    <h2>{{uneBD.title}}</h2>
+    <img src="{{uneBD.img}}" alt="{{uneBD.alt}}">
+    <p>{{uneBD.alt}}</p>
+</div>
