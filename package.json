@@ -1,5 +1,5 @@
 {
-  "name": "examen-ng",
+  "name": "api-angular-xkcd",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
