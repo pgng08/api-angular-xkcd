@@ -15,14 +15,28 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 //classe BandeDessinerComponent
 export class BandeDessinerComponent implements OnInit {
   uneBD: IBandeDessinee = {};
+  numDerniereBD: any;
+  numFormControl: FormControl;
 
-  constructor(public xkcd: XkcdService) {}
+
+  constructor(public xkcd: XkcdService) {
+    this.numFormControl = new FormControl('', [
+      Validators.required,
+      Validators.min(1),
+      Validators.max(this.numDerniereBD),
+    ]);
+  }
 
   ngOnInit(): void {
-    
     this.xkcd.getDerniereBD().subscribe((data) => {
       this.uneBD = data;
-      console.log(this.uneBD);
+      this.numDerniereBD = this.uneBD.num;
+      this.numFormControl.setValidators([
+        Validators.required,
+        Validators.min(1),
+        Validators.max(this.numDerniereBD),
+      ]);
+      //console.log(this.uneBD.num);
     });
   }
 
@@ -33,25 +47,27 @@ export class BandeDessinerComponent implements OnInit {
   btnSoumettre(num: any) {
     console.log('click btnSoumettre');
 
-    this.xkcd.getUneBD(num).subscribe((data) => {
-      this.uneBD = data;
-
-      console.log(data);
-    });
+    if (this.numFormControl.valid) {
+      this.xkcd.getUneBD(num).subscribe((data) => {
+        this.uneBD = data;
+        console.log(data);
+      });
+    } else {
+      this.numFormControl.markAsTouched();
+    }
   }
 
   /**
    * Fonction du bouton qui prend une BD aleatoire
    */
-btnAleatoire() {
-  console.log('click btnAleatoire');
+  btnAleatoire() {
+    console.log('click btnAleatoire');
 
-  this.xkcd.getAleatoireBD().subscribe((data) => {
-    this.uneBD = data;
-    console.log(this.uneBD);
-  });
-}
-
+    this.xkcd.getAleatoireBD(this.numDerniereBD).subscribe((data) => {
+      this.uneBD = data;
+      console.log(this.uneBD);
+    });
+  }
 
   /**
    * Fonction du bouton qui prend la derniere BD

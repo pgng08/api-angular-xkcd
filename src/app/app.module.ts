@@ -4,13 +4,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { BandeDessinerComponent } from './bande-dessiner/bande-dessiner.component';
-import { ServComponent } from './no-serv/serv.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BandeDessinerComponent,
-    ServComponent
   ],
   imports: [
     BrowserModule,
